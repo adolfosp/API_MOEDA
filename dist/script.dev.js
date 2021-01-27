@@ -1,6 +1,6 @@
 "use strict";
 
-var baseUrl = 'https://api.hgbrasil.com/finance'; // Get Elements --------------------------------------------
+var baseUrl = 'https://api.hgbrasil.com/finance?key=b9c37865'; // Get Elements --------------------------------------------
 
 var searchInput = getElement('.search-input'),
     searchButton = getElement('.search-button'),
@@ -17,16 +17,16 @@ function requestPokeInfo(url) {
     return response.json();
   }).then(function (data) {
     pokemon = data;
-    console.log(pokemon);
   })["catch"](function (err) {
     return console.log(err);
   });
 }
 
-console.log(pokemon); // Add Events --------------------------------------------
+setTimeout(function () {
+  console.log(pokemon.results.currencies);
+}, 2000); // Add Events --------------------------------------------
 
 searchButton.addEventListener('click', function (event) {
   event.preventDefault();
-  console.log('rtsd');
   requestPokeInfo(baseUrl);
 });

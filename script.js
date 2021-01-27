@@ -1,4 +1,4 @@
-const baseUrl = 'https://api.hgbrasil.com/finance';
+const baseUrl = 'https://api.hgbrasil.com/finance?key=b9c37865';
 
 // Get Elements --------------------------------------------
 const searchInput = getElement('.search-input'),
@@ -14,26 +14,26 @@ function getElement(element) {
 }
 
 function requestPokeInfo(url) {
-  fetch(url )
+  fetch(url)
     .then(response => response.json())
     .then(data => {
       pokemon = data;
-      console.log(pokemon);
     })
     .catch(err => console.log(err));
 }
 
-console.log(pokemon);
 
 
 
 
+setTimeout(function () {
+  console.log(pokemon.results.currencies);
+
+}, 2000);
 
 // Add Events --------------------------------------------
 searchButton.addEventListener('click', event => {
   event.preventDefault();
-  console.log('rtsd');
   requestPokeInfo(baseUrl);
-
 
 });
