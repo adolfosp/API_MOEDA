@@ -46,18 +46,20 @@ function moedaKeyUp(dollar, euro, audDollar) {
   moeda.addEventListener("keyup", function (e) {
     e.preventDefault();
     var tipoMoeda = verificaCheck();
+    var labelMoeda = document.getElementById('tipoMoeda');
 
     switch (tipoMoeda) {
       case "USD":
-        real.value = isNaN((moeda.value * dollar).toFixed(2)) ? 'Por favor, insira apenas números' : (moeda.value * dollar).toFixed(2);
+        real.value = isNaN((moeda.value * dollar).toFixed(2)) ? "Por favor, insira apenas números" : (moeda.value * dollar).toFixed(2) + "≅";
+        console.log(labelMoeda);
         break;
 
       case "EUR":
-        real.value = isNaN((moeda.value * euro).toFixed(2)) ? 'Por favor, insira apenas números' : (moeda.value * euro).toFixed(2);
+        real.value = isNaN((moeda.value * euro).toFixed(2)) ? "Por favor, insira apenas números" : (moeda.value * euro).toFixed(2) + "≅";
         break;
 
       case "AUD":
-        real.value = isNaN((moeda.value * audDollar).toFixed(2)) ? 'Por favor, insira apenas números' : (moeda.value * audDollar).toFixed(2);
+        real.value = isNaN((moeda.value * audDollar).toFixed(2)) ? "Por favor, insira apenas números" : (moeda.value * audDollar).toFixed(2) + "≅";
         break;
     }
   });
@@ -70,15 +72,15 @@ function realKeyUp(dollar, euro, audDollar) {
 
     switch (tipoMoeda) {
       case "USD":
-        moeda.value = isNaN((real.value / dollar).toFixed(2)) ? 'Por favor, insira apenas números' : (real.value / dollar).toFixed(2);
+        moeda.value = isNaN((real.value / dollar).toFixed(2)) ? "Por favor, insira apenas números" : (real.value / dollar).toFixed(2) + "≅";
         break;
 
       case "EUR":
-        moeda.value = isNaN((real.value / euro).toFixed(2)) ? 'Por favor, insira apenas números' : (real.value / euro).toFixed(2);
+        moeda.value = isNaN((real.value / euro).toFixed(2)) ? "Por favor, insira apenas números" : (real.value / euro).toFixed(2) + "≅";
         break;
 
       case "AUD":
-        moeda.value = isNaN((real.value / audDollar).toFixed(2)) ? 'Por favor, insira apenas números' : (real.value / audDollar).toFixed(2);
+        moeda.value = isNaN((real.value / audDollar).toFixed(2)) ? "Por favor, insira apenas números" : (real.value / audDollar).toFixed(2) + "≅";
         break;
     }
   });
@@ -96,8 +98,8 @@ function pegaValor(data) {
 (function limparCampo() {
   var campos = document.querySelector('input[name="flexRadioDefault"]:checked');
   campos.addEventListener("click", function () {
-    moeda.value = '';
-    real.value = '';
+    moeda.value = "";
+    real.value = "";
   });
 })();
 

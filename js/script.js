@@ -1,8 +1,6 @@
 const baseUrl = "https://api.hgbrasil.com/finance?key=b9c37865";
 
-// Get Elements --------------------------------------------
-const searchInput = getElement(".search-input"),
-  searchButton = getElement(".search-button"),
+const  
   moeda = getElement(".moeda"),
   real = getElement(".real");
 
@@ -16,6 +14,8 @@ async function requestPokeInfo(url) {
   return data;
 }
 
+
+
 function verificaCheck() {
   const campoCheck = document.querySelector(
     'input[name="flexRadioDefault"]:checked'
@@ -23,20 +23,37 @@ function verificaCheck() {
   return campoCheck.value;
 }
 
+
+  let campos = document.getElementsByClassName('form-control');
+  console.log(campos);
+  campos[0].addEventListener('click',(e)=>{
+         const labelMoeda = document.getElementById('tipoMoeda');
+         labelMoeda.innerHTML = verificaCheck();
+
+  });
+
+
 function moedaKeyUp(dollar, euro, audDollar) {
   moeda.addEventListener("keyup", (e) => {
     e.preventDefault();
     const tipoMoeda = verificaCheck();
 
+    
     switch (tipoMoeda) {
       case "USD":
-        real.value = isNaN((moeda.value * dollar).toFixed(2)) ? 'Por favor, insira apenas números':(moeda.value * dollar).toFixed(2);
+        real.value = isNaN((moeda.value * dollar).toFixed(2))
+          ? "Por favor, insira apenas números"
+          : (moeda.value * dollar).toFixed(2) + "≅";
         break;
       case "EUR":
-        real.value = isNaN((moeda.value * euro).toFixed(2)) ? 'Por favor, insira apenas números':(moeda.value * euro).toFixed(2);
+        real.value = isNaN((moeda.value * euro).toFixed(2))
+          ? "Por favor, insira apenas números"
+          : (moeda.value * euro).toFixed(2) + "≅";
         break;
       case "AUD":
-        real.value = isNaN((moeda.value * audDollar).toFixed(2)) ? 'Por favor, insira apenas números':(moeda.value * audDollar).toFixed(2);
+        real.value = isNaN((moeda.value * audDollar).toFixed(2))
+          ? "Por favor, insira apenas números"
+          : (moeda.value * audDollar).toFixed(2) + "≅";
         break;
     }
   });
@@ -48,13 +65,19 @@ function realKeyUp(dollar, euro, audDollar) {
     const tipoMoeda = verificaCheck();
     switch (tipoMoeda) {
       case "USD":
-        moeda.value = isNaN((real.value / dollar).toFixed(2)) ? 'Por favor, insira apenas números':(real.value / dollar).toFixed(2);
+        moeda.value = isNaN((real.value / dollar).toFixed(2))
+          ? "Por favor, insira apenas números"
+          : (real.value / dollar).toFixed(2) + "≅";
         break;
       case "EUR":
-        moeda.value = isNaN((real.value / euro).toFixed(2)) ? 'Por favor, insira apenas números':(real.value / euro).toFixed(2);
+        moeda.value = isNaN((real.value / euro).toFixed(2))
+          ? "Por favor, insira apenas números"
+          : (real.value / euro).toFixed(2) + "≅";
         break;
       case "AUD":
-        moeda.value = isNaN((real.value / audDollar).toFixed(2)) ? 'Por favor, insira apenas números':(real.value / audDollar).toFixed(2);
+        moeda.value = isNaN((real.value / audDollar).toFixed(2))
+          ? "Por favor, insira apenas números"
+          : (real.value / audDollar).toFixed(2) + "≅";
         break;
     }
   });
@@ -69,17 +92,17 @@ function pegaValor(data) {
   realKeyUp(dollar, euro, audDollar);
 }
 
-(function limparCampo(){
-  let campos = document.querySelector(
-    'input[name="flexRadioDefault"]:checked'
-  );
+(function limparCampo() {
+  let campos = document.querySelector('input[name="flexRadioDefault"]:checked');
 
- campos.addEventListener("click", ()=>{
-    moeda.value = '';
-    real.value = '';
- });
-
+  campos.addEventListener("click", () => {
+    moeda.value = "";
+    real.value = "";
+  });
 })();
+
+
+
 
 window.addEventListener("load", (event) => {
   event.preventDefault();

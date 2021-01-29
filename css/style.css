@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "RanilleNormal";
+  src: url(../fonts/RanilleNormalRegular-EaZJj.ttf);
+}
 body {
   background-color: indianred;
 }
@@ -15,6 +19,15 @@ div.container .campo {
 input.form-control {
   font-size: 25px;
   font-weight: bolder;
+}
+
+.tipoMoeda {
+  position: absolute;
+  margin-top: 18%;
+  margin-left: 15%;
+  font-family: RanilleNormal;
+  font-size: 50px;
+  color: white;
 }
 
 /*# sourceMappingURL=style.css.map */
