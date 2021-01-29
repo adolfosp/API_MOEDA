@@ -6,7 +6,6 @@ const searchInput = getElement(".search-input"),
   moeda = getElement(".moeda"),
   real = getElement(".real");
 
-
 function getElement(element) {
   return document.querySelector(element);
 }
@@ -17,26 +16,70 @@ async function requestPokeInfo(url) {
   return data;
 }
 
+function verificaCheck() {
+  const campoCheck = document.querySelector(
+    'input[name="flexRadioDefault"]:checked'
+  );
+  return campoCheck.value;
+}
+
+function moedaKeyUp(dollar, euro, audDollar) {
+  moeda.addEventListener("keyup", (e) => {
+    e.preventDefault();
+    const tipoMoeda = verificaCheck();
+
+    switch (tipoMoeda) {
+      case "USD":
+        real.value = isNaN((moeda.value * dollar).toFixed(2)) ? 'Por favor, insira apenas números':(moeda.value * dollar).toFixed(2);
+        break;
+      case "EUR":
+        real.value = isNaN((moeda.value * euro).toFixed(2)) ? 'Por favor, insira apenas números':(moeda.value * euro).toFixed(2);
+        break;
+      case "AUD":
+        real.value = isNaN((moeda.value * audDollar).toFixed(2)) ? 'Por favor, insira apenas números':(moeda.value * audDollar).toFixed(2);
+        break;
+    }
+  });
+}
+
+function realKeyUp(dollar, euro, audDollar) {
+  real.addEventListener("keyup", (e) => {
+    e.preventDefault();
+    const tipoMoeda = verificaCheck();
+    switch (tipoMoeda) {
+      case "USD":
+        moeda.value = isNaN((real.value / dollar).toFixed(2)) ? 'Por favor, insira apenas números':(real.value / dollar).toFixed(2);
+        break;
+      case "EUR":
+        moeda.value = isNaN((real.value / euro).toFixed(2)) ? 'Por favor, insira apenas números':(real.value / euro).toFixed(2);
+        break;
+      case "AUD":
+        moeda.value = isNaN((real.value / audDollar).toFixed(2)) ? 'Por favor, insira apenas números':(real.value / audDollar).toFixed(2);
+        break;
+    }
+  });
+}
+
 function pegaValor(data) {
   console.log(data.results.currencies);
   let dollar = Number(data.results.currencies.USD.sell);
-  moeda.value = (dollar/dollar).toFixed(2);
-  real.value = dollar.toFixed(2);
-
-  moeda.addEventListener("keyup", (e) => {
-    e.preventDefault();
-   real.value = (moeda.value*dollar).toFixed(2);
-  });
-
-  real.addEventListener("keyup", (e) => {
-    e.preventDefault();
-   moeda.value = (real.value/dollar).toFixed(2);
-  });
-
+  let euro = Number(data.results.currencies.EUR.sell);
+  let audDollar = Number(data.results.currencies.AUD.buy);
+  moedaKeyUp(dollar, euro, audDollar);
+  realKeyUp(dollar, euro, audDollar);
 }
 
+(function limparCampo(){
+  let campos = document.querySelector(
+    'input[name="flexRadioDefault"]:checked'
+  );
 
+ campos.addEventListener("click", ()=>{
+    moeda.value = '';
+    real.value = '';
+ });
 
+})();
 
 window.addEventListener("load", (event) => {
   event.preventDefault();

@@ -2,7 +2,7 @@ body{
     background-color:indianred;
 }
 
-main.container .campo{
+div.container .campo{
     position: relative;
     top:50vh;
     
@@ -11,4 +11,8 @@ main.container .campo{
     text-align: center;
     font-size: 25px;
     height: 55px;
+}
+input.form-control{
+    font-size:25px;
+    font-weight: bolder;
 }
